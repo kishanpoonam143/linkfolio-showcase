@@ -18,7 +18,18 @@ export const ProductGrid = ({ products, categories }: ProductGridProps) => {
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          product.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+    
+    let matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+    
+    // Check if selected category is a parent category
+    if (selectedCategory !== 'all') {
+      const selectedCat = categories.find(cat => cat.slug === selectedCategory);
+      if (selectedCat?.isParent) {
+        // If parent category is selected, show products from all child categories
+        const childCategories = categories.filter(cat => cat.parentId === selectedCat.id);
+        matchesCategory = childCategories.some(child => child.slug === product.category);
+      }
+    }
     
     return matchesSearch && matchesCategory;
   });
@@ -44,11 +55,30 @@ export const ProductGrid = ({ products, categories }: ProductGridProps) => {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Categories</SelectItem>
-            {categories.map(category => (
-              <SelectItem key={category.id} value={category.slug}>
-                {category.name}
-              </SelectItem>
-            ))}
+            {categories
+              .filter(category => category.isParent)
+              .map(parentCategory => (
+                <div key={parentCategory.id}>
+                  <SelectItem value={parentCategory.slug} className="font-semibold">
+                    {parentCategory.name}
+                  </SelectItem>
+                  {categories
+                    .filter(cat => cat.parentId === parentCategory.id)
+                    .map(childCategory => (
+                      <SelectItem key={childCategory.id} value={childCategory.slug} className="pl-6">
+                        └ {childCategory.name}
+                      </SelectItem>
+                    ))}
+                </div>
+              ))}
+            {/* Standalone categories (no parent) */}
+            {categories
+              .filter(category => !category.isParent && !category.parentId)
+              .map(category => (
+                <SelectItem key={category.id} value={category.slug}>
+                  {category.name}
+                </SelectItem>
+              ))}
           </SelectContent>
         </Select>
       </div>

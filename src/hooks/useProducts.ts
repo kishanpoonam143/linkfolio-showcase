@@ -6,11 +6,15 @@ const CATEGORIES_KEY = 'affiliate_categories';
 
 // Sample data
 const sampleCategories: Category[] = [
-  { id: '1', name: 'Electronics', slug: 'electronics' },
-  { id: '2', name: 'Fashion', slug: 'fashion' },
-  { id: '3', name: 'Home & Garden', slug: 'home-garden' },
-  { id: '4', name: 'Books', slug: 'books' },
-  { id: '5', name: 'Sports', slug: 'sports' }
+  { id: '1', name: 'Electronics', slug: 'electronics', isParent: true },
+  { id: '2', name: 'Smartphones', slug: 'smartphones', parentId: '1' },
+  { id: '3', name: 'Laptops', slug: 'laptops', parentId: '1' },
+  { id: '4', name: 'Clothing', slug: 'clothing', isParent: true },
+  { id: '5', name: 'Men', slug: 'men', parentId: '4' },
+  { id: '6', name: 'Women', slug: 'women', parentId: '4' },
+  { id: '7', name: 'Home & Garden', slug: 'home-garden', isParent: true },
+  { id: '8', name: 'Books', slug: 'books', isParent: true },
+  { id: '9', name: 'Sports', slug: 'sports', isParent: true }
 ];
 
 const sampleProducts: Product[] = [
@@ -20,7 +24,7 @@ const sampleProducts: Product[] = [
     description: 'Premium noise-canceling wireless headphones with 30-hour battery life and superior sound quality',
     image: '/src/assets/headphones.jpg',
     affiliateLink: 'https://example.com/headphones',
-    category: 'electronics',
+    category: 'smartphones',
     price: '$299',
     rating: 4.8,
     createdAt: new Date()
@@ -31,7 +35,7 @@ const sampleProducts: Product[] = [
     description: 'Advanced fitness tracking with heart rate monitor, GPS, and comprehensive health insights',
     image: '/src/assets/smartwatch.jpg',
     affiliateLink: 'https://example.com/watch',
-    category: 'electronics',
+    category: 'smartphones',
     price: '$199',
     rating: 4.6,
     createdAt: new Date()
@@ -42,7 +46,7 @@ const sampleProducts: Product[] = [
     description: 'Comfortable and sustainable organic cotton t-shirt perfect for everyday wear',
     image: '/src/assets/tshirt.jpg',
     affiliateLink: 'https://example.com/tshirt',
-    category: 'fashion',
+    category: 'men',
     price: '$29',
     rating: 4.5,
     createdAt: new Date()
