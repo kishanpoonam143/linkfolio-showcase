@@ -3,17 +3,17 @@ import { Product, Category } from '@/types/Product';
 import { ProductCard } from './ProductCard';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, Filter } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 interface ProductGridProps {
   products: Product[];
   categories: Category[];
+  selectedCategory: string;
+  onCategorySelect: (category: string) => void;
 }
 
-export const ProductGrid = ({ products, categories }: ProductGridProps) => {
+export const ProductGrid = ({ products, categories, selectedCategory, onCategorySelect }: ProductGridProps) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -36,9 +36,9 @@ export const ProductGrid = ({ products, categories }: ProductGridProps) => {
 
   return (
     <div className="space-y-8">
-      {/* Search and Filter */}
-      <div className="flex flex-col sm:flex-row gap-4">
-        <div className="relative flex-1">
+      {/* Search Only */}
+      <div className="flex justify-center">
+        <div className="relative w-full max-w-md">
           <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Search products..."
@@ -47,40 +47,6 @@ export const ProductGrid = ({ products, categories }: ProductGridProps) => {
             className="pl-10 bg-background/50 border-border/50 focus:border-primary"
           />
         </div>
-        
-        <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-          <SelectTrigger className="w-full sm:w-[200px] bg-background/50 border-border/50">
-            <Filter className="w-4 h-4 mr-2" />
-            <SelectValue placeholder="Filter by category" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
-            {categories
-              .filter(category => category.isParent)
-              .map(parentCategory => (
-                <div key={parentCategory.id}>
-                  <SelectItem value={parentCategory.slug} className="font-semibold">
-                    {parentCategory.name}
-                  </SelectItem>
-                  {categories
-                    .filter(cat => cat.parentId === parentCategory.id)
-                    .map(childCategory => (
-                      <SelectItem key={childCategory.id} value={childCategory.slug} className="pl-6">
-                        └ {childCategory.name}
-                      </SelectItem>
-                    ))}
-                </div>
-              ))}
-            {/* Standalone categories (no parent) */}
-            {categories
-              .filter(category => !category.isParent && !category.parentId)
-              .map(category => (
-                <SelectItem key={category.id} value={category.slug}>
-                  {category.name}
-                </SelectItem>
-              ))}
-          </SelectContent>
-        </Select>
       </div>
 
       {/* Results Count */}
@@ -102,7 +68,7 @@ export const ProductGrid = ({ products, categories }: ProductGridProps) => {
             variant="outline" 
             onClick={() => {
               setSearchTerm('');
-              setSelectedCategory('all');
+              onCategorySelect('all');
             }}
             className="mt-4"
           >
