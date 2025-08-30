@@ -21,8 +21,7 @@ export const AdminPanel = () => {
     image: '',
     affiliateLink: '',
     category: '',
-    price: '',
-    rating: ''
+    price: ''
   });
 
   const handleAddProduct = (e: React.FormEvent) => {
@@ -39,8 +38,7 @@ export const AdminPanel = () => {
 
     addProduct({
       ...newProduct,
-      image: newProduct.image || '/placeholder.svg',
-      rating: newProduct.rating ? parseFloat(newProduct.rating) : undefined
+      image: newProduct.image || '/placeholder.svg'
     });
 
     setNewProduct({
@@ -49,8 +47,7 @@ export const AdminPanel = () => {
       image: '',
       affiliateLink: '',
       category: '',
-      price: '',
-      rating: ''
+      price: ''
     });
     
     setIsAddingProduct(false);
@@ -135,20 +132,6 @@ export const AdminPanel = () => {
                     value={newProduct.price}
                     onChange={(e) => setNewProduct({...newProduct, price: e.target.value})}
                     placeholder="e.g. $99.99"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="rating">Rating (1-5)</Label>
-                  <Input
-                    id="rating"
-                    type="number"
-                    min="1"
-                    max="5"
-                    step="0.1"
-                    value={newProduct.rating}
-                    onChange={(e) => setNewProduct({...newProduct, rating: e.target.value})}
-                    placeholder="4.5"
                   />
                 </div>
               </div>

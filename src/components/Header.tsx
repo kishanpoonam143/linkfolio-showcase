@@ -33,9 +33,7 @@ export const Header = () => {
               </Button>
             </>
           ) : (
-            <Button variant="outline" asChild>
-              <a href="/admin">Admin Login</a>
-            </Button>
+           <span></span>
           )}
         </nav>
       </div>

@@ -9,6 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 
 export const AdminLogin = () => {
   const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
   const { toast } = useToast();
@@ -20,7 +21,7 @@ export const AdminLogin = () => {
     // Simulate loading
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    const success = login(password);
+    const success = login(userName,password);
     
     if (success) {
       toast({
@@ -47,13 +48,27 @@ export const AdminLogin = () => {
             <ShieldCheck className="w-8 h-8 text-primary-foreground" />
           </div>
           <CardTitle className="text-2xl">Admin Access</CardTitle>
-          <CardDescription>
+          {/* <CardDescription>
             Enter your password to access the admin panel
-          </CardDescription>
+          </CardDescription> */}
         </CardHeader>
         
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+              <Label htmlFor="username">User name</Label>
+              <div className="relative">
+                <Input
+                  id="username"
+                  type="text"
+                  placeholder="Enter user name"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  className="pl-10"
+                  required
+                />
+              </div>
+            </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <div className="relative">
@@ -79,11 +94,11 @@ export const AdminLogin = () => {
               {isLoading ? 'Signing in...' : 'Sign In'}
             </Button>
             
-            <div className="text-center">
+            {/* <div className="text-center">
               <p className="text-sm text-muted-foreground">
                 Demo password: <span className="font-mono bg-muted px-1 rounded">admin123</span>
               </p>
-            </div>
+            </div> */}
           </form>
         </CardContent>
       </Card>
