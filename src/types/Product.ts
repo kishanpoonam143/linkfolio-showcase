@@ -6,8 +6,6 @@ export interface Product {
   affiliateLink: string;
   category: string;
   price?: string;
-  rating?: number;
-  createdAt: Date;
 }
 
 export interface Category {

@@ -44,14 +44,14 @@ export const Hero = () => {
             Explore Products
           </Button>
           
-          <Button 
+          {/* <Button 
             variant="outline" 
             size="lg"
             className="text-lg px-8 py-6 border-primary/30 hover:bg-primary/10"
             asChild
           >
             <a href="/admin">Admin Access</a>
-          </Button>
+          </Button> */}
         </div>
       </div>
       

@@ -37,7 +37,7 @@ const Index = () => {
                     Featured Products
                   </h2>
                   <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                    Discover handpicked products across all categories with our smart filtering system
+                    Discover handpicked products across all categories
                   </p>
                 </div>
                 
@@ -54,7 +54,7 @@ const Index = () => {
           <footer className="border-t border-border/40 py-8 px-4">
             <div className="container mx-auto text-center">
               <p className="text-muted-foreground">
-                © 2024 AffiliateHub. Built with React & Tailwind CSS.
+                © 2025 AffiliateHub.
               </p>
             </div>
           </footer>

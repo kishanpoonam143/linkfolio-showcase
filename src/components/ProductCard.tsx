@@ -12,7 +12,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Card className="group overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm transition-all hover:shadow-glow hover:border-primary/50 hover:-translate-y-1">
       <CardHeader className="relative p-0">
-        <div className="aspect-video overflow-hidden bg-gradient-secondary">
+        <div className="aspect-video1 overflow-hidden bg-gradient-secondary">
           <img
             src={product.image}
             alt={product.name}
@@ -31,23 +31,17 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           {product.name}
         </CardTitle>
         
-        <p className="text-muted-foreground text-sm line-clamp-3">
+        {/* <p className="text-muted-foreground text-sm line-clamp-3">
           {product.description}
-        </p>
+        </p> */}
         
         <div className="flex items-center justify-between">
           {product.price && (
             <span className="text-xl font-bold text-primary">
-              {product.price}
+              Rs.{product.price}
             </span>
           )}
           
-          {product.rating && (
-            <div className="flex items-center gap-1">
-              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-              <span className="text-sm font-medium">{product.rating}</span>
-            </div>
-          )}
         </div>
       </CardContent>
       

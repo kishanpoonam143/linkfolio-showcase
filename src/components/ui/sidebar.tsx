@@ -262,7 +262,7 @@ const SidebarTrigger = React.forwardRef<
   React.ComponentProps<typeof Button>
 >(({ className, onClick, ...props }, ref) => {
   const { toggleSidebar } = useSidebar()
-
+  console.log(className,props,ref);
   return (
     <Button
       ref={ref}
@@ -276,7 +276,8 @@ const SidebarTrigger = React.forwardRef<
       }}
       {...props}
     >
-      <PanelLeft />
+      {/* <PanelLeft /> */}
+      <img src="/src/assets/logo.jpg"/>
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )

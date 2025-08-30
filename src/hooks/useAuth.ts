@@ -10,9 +10,9 @@ export const useAuth = () => {
     setIsLoading(false);
   }, []);
 
-  const login = (password: string) => {
+  const login = (userName:string,password: string) => {
     // Simple password check - in real app, use proper authentication
-    if (password === 'admin123') {
+    if (userName === 'kishan' && password === 'admin123') {
       localStorage.setItem('affiliate_admin_auth', 'true');
       setIsAuthenticated(true);
       return true;
@@ -23,6 +23,7 @@ export const useAuth = () => {
   const logout = () => {
     localStorage.removeItem('affiliate_admin_auth');
     setIsAuthenticated(false);
+    window.location.href = '/';
   };
 
   return { isAuthenticated, isLoading, login, logout };
